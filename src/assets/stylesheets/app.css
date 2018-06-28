@@ -1,0 +1,52 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+  align-items: left;
+}
+
+.headertext {
+  text-align: center;
+  font-size: large;
+ color: gray;
+ font-weight: bold;
+}
+.App-header {
+  background-color: #ffffff;
+  height: 100px;  
+  text-align: left;
+  font-size: 1.5em;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.footer_border {
+  width: 1020;
+  height: 6px;
+  background: url(../images/footer_strip.png) repeat;
+}
+.footer_main {
+  width: 1020px;
+  height: auto;
+  margin: 0 auto;
+}
+
+
+a:link {
+  text-decoration: none;
+  color: blue;
+}
+
