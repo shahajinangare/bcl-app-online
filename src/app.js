@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
- 
-import Profile from "../../profile";
-import "../../app.css";
-
-
-import Register from '../../components/users/register'
-import Login from '../../components/users/login'
-import Forgotpass from '../../components/users/forgotpass'
-import Home from '../../components/common/home'
-import UserList from '../../components/users/userlist';
-import MenuComponent from '../../components/common/adminmenu'
+import Home from "./home";
+import Profile from "./profile";
+import "./app.css";
+import Register from '../src/components/users/register'
+import Login from '../src/components/users/login'
+import forgotpass from '../src/components/users/forgotpass'
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
   return (
     
@@ -24,7 +19,9 @@ const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
   );
 };
 
-class MaincontentComponent extends Component {
+class App extends Component {
+   
+
   handleLogin = () => {
     const { state = {} } = this.props.location;
     const { prevLocation } = state;
@@ -52,14 +49,13 @@ class MaincontentComponent extends Component {
       },
     );
   };
-
   render() {
     const { state = {} } = this.props.location;
     const { error } = state;
 
     return (
       <div>
-        {/* <div className="links">
+        <div className="links">
           <Link to="/" className="link">
             Home
           </Link>
@@ -69,17 +65,14 @@ class MaincontentComponent extends Component {
           <button onClick={this.handleLogin}>Login</button>
           <button onClick={this.handlelogout}>Log Out</button>
           <a href="/forgotpass" >forgotpass</a>
-        </div> */}
-        <div ><MenuComponent /></div>
+        </div>
         <div className="tabs">
           <Switch>
-            <Route path="/" exact component={Login} />
-            {/* <Route path="/register" exact component={Register} /> */}
-            <ProtectedRoute path="/register" exact component={Register} />
-            <ProtectedRoute path="/login" exact  component={Login} />
-            <ProtectedRoute path="/forgotpass" exact component={Forgotpass} />
-            <ProtectedRoute path="/home" exact component={Home} />
-            <ProtectedRoute exact path='/users' component={UserList} />
+            <Route path="/" exact component={Home} />
+            <Route path="/register" exact component={Register} />
+            <ProtectedRoute path="/register" component={Register} />
+            <ProtectedRoute path="/login"   component={Login} />
+            <ProtectedRoute path="/forgotpass"   component={forgotpass} />
           </Switch>
         </div>
       </div>
@@ -87,4 +80,4 @@ class MaincontentComponent extends Component {
   }
 }
 
-export default MaincontentComponent;
+export default App;

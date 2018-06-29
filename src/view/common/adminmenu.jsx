@@ -19,7 +19,7 @@ const MenuContent = ({menuaccess}) => (
             }
         }
         )}
-        <li><a href='' onClick={menuaccess.logoutsubmit} ><span>Log Out</span></a></li>
+        <li><a href='/login'  ><span>Log Out</span></a></li>
     </ul>
 </div>
 
