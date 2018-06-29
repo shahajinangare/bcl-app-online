@@ -92,7 +92,7 @@ class OfferList extends Component {
             .then((responseJson) => {
                
                 if (responseJson.code === 200)
-                    alert('Application Created');
+                    alert('Application Number :' + responseJson.outid + ' is created.');
             })
             .catch((error) => {
                 console.error(error);
