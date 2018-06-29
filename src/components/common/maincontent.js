@@ -4,7 +4,7 @@ import { Switch, Route} from "react-router-dom";
 import Registration from '../../components/creditcard/registration';
 import Verification from '../../components/creditcard/verification';
 import Offers from '../../components/creditcard/offers';
-
+import Home from '../../components/common/home';
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
   return (
     
@@ -54,13 +54,11 @@ class MaincontentComponent extends Component {
     return (
       <div>
         { }
-        <div style={{height:'300px',alignItems:'center',width:'100%',paddingLeft:'300px'  }} > <br/><br/><br/><br/><a href="/registration"  className="btn btn-success" >Credit Card</a><br/>
-        <br/><br/><br/>
-        <a href="/registration" className="btn btn-success" >Personal Loan</a></div>
+       
         <div className="tabs">
           <Switch>
-            {/* <Route path="/" exact component={Login} /> */}
-            {/* <Route path="/register" exact component={Register} /> */}
+            <Route path="/" exact component={Home} />
+            <ProtectedRoute path="/home" exact component={Home} />
             <ProtectedRoute path="/registration" exact component={Registration} />
             <ProtectedRoute path="/verification" exact  component={Verification} />
             <ProtectedRoute path="/offers" exact  component={Offers} />

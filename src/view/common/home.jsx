@@ -4,9 +4,9 @@ import React from 'react';
 const HomeComponent = () => (
       <div>
              
-            <div style={{minHeight:'400px',padding:'10px 0'}}>
-                  Welcome to Bajaj capital- service
-            </div>
+             <div style={{height:'300px',alignItems:'center',width:'100%',paddingLeft:'300px'  }} > <br/><br/><br/><br/><a href="/registration"  className="btn btn-success" >Credit Card</a><br/>
+        <br/><br/><br/>
+        <a href="/registration" className="btn btn-success" >Personal Loan</a></div>
       </div>
 
 );
