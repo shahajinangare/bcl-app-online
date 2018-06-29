@@ -5,7 +5,8 @@ import Login from '../../components/users/login';
 import Register from '../../components/users/register';
 import Forgotpass from '../../components/users/forgotpass';
 import UserList from '../../components/users/userlist';
-import { Redirect } from 'react-router'
+import OffersList from '../../components/creditcard/offers';
+import { Redirect } from 'react-router';
 class MainComponent extends Component {
   render() {
     return (
@@ -16,6 +17,7 @@ class MainComponent extends Component {
             <Route exact path='/register' component={Register}  />
             <Route exact path='/forgotpass' component={Forgotpass} />
             <Route exact path='/users' component={UserList} />
+            <Route exact path='/offers' component={OffersList} />
             {/* <Redirect to="/register" /> */}
           </Switch>
        
