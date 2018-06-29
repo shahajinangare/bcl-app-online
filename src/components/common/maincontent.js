@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Switch, Route} from "react-router-dom";
 
-import Registration from '../../components/creditcard/registration'
-import Verification from '../../components/creditcard/verification'
+import Registration from '../../components/creditcard/registration';
+import Verification from '../../components/creditcard/verification';
+import Offers from '../../components/creditcard/offers';
 
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
   return (
@@ -62,6 +63,7 @@ class MaincontentComponent extends Component {
             {/* <Route path="/register" exact component={Register} /> */}
             <ProtectedRoute path="/registration" exact component={Registration} />
             <ProtectedRoute path="/verification" exact  component={Verification} />
+            <ProtectedRoute path="/offers" exact  component={Offers} />
             {/* <ProtectedRoute path="/forgotpass" exact component={Forgotpass} />
             <ProtectedRoute path="/home" exact component={Home} />
             <ProtectedRoute exact path='/users' component={UserList} /> */}
