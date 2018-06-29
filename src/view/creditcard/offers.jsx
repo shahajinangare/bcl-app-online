@@ -21,12 +21,9 @@ const OfferListContent = ({ offerinput }) => (
                         return (
                             <div>
                                 <img src={selectedrow.original.logopath} />
-
                             </div>
                         )
                     }
-
-
                 },
                 {
                     Header: "",
