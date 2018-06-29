@@ -8,10 +8,6 @@ const OfferListContent = ({ offerinput }) => (
 
     <div>
 
-
-        <br />
-        <br />
-
         <ReactTable
             data={offerinput.state.outData}
             columns={[
