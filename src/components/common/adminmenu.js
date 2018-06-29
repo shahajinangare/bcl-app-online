@@ -18,8 +18,19 @@ class adminmenu extends React.Component {
     }
 
     logoutsubmit(event) {
+        
+        const { state = {} } = this.props.location;
+        const { prevLocation } = state;
          sessionStorage.clear();
-         ReactDOM.render((<MainContent />), document.getElementById("main-content"));
+         this.setState(
+            {
+              loggedIn: true,
+            },
+            () => {
+              this.props.history.push(prevLocation || "/login");
+            },
+          );
+        // ReactDOM.render((<MainContent />), document.getElementById("main-content"));
     }
 
     componentDidMount() {
