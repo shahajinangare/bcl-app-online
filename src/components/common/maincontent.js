@@ -52,17 +52,7 @@ class MaincontentComponent extends Component {
 
     return (
       <div>
-        {/* <div className="links">
-          <Link to="/" className="link">
-            Home
-          </Link>
-          <Link to="/profile" className="link">
-            Profile
-          </Link>
-          <button onClick={this.handleLogin}>Login</button>
-          <button onClick={this.handlelogout}>Log Out</button>
-          <a href="/forgotpass" >forgotpass</a>
-        </div> */}
+        { }
         <div style={{height:'300px',alignItems:'center',width:'100%',paddingLeft:'300px'  }} > <br/><br/><br/><br/><a href="/registration"  className="btn btn-success" >Credit Card</a><br/>
         <br/><br/><br/>
         <a href="/registration" className="btn btn-success" >Personal Loan</a></div>

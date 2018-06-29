@@ -67,7 +67,7 @@ class Registration extends Component {
     
     render() {
       return (
-          <RegistrationContent Register={this}/>
+          <RegistrationContent objregister={this}/>
       )
     }
   }
