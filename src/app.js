@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import Home from "./home";
-import Profile from "./profile";
+ 
 import "./app.css";
 import Register from '../src/components/users/register'
 import Login from '../src/components/users/login'
