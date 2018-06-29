@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
- 
-import Profile from "../../profile";
-import "../../app.css";
+import { Switch, Route} from "react-router-dom";
 
+import Registration from '../../components/creditcard/registration'
+import Verification from '../../components/creditcard/verification'
 
-import Register from '../../components/users/register'
-import Login from '../../components/users/login'
-import Forgotpass from '../../components/users/forgotpass'
-import Home from '../../components/common/home'
-import UserList from '../../components/users/userlist';
-import MenuComponent from '../../components/common/adminmenu'
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
   return (
     
@@ -54,8 +47,8 @@ class MaincontentComponent extends Component {
   };
 
   render() {
-    const { state = {} } = this.props.location;
-    const { error } = state;
+  //  const { state = {} } = this.props.location;
+   // const { error } = state;
 
     return (
       <div>
@@ -70,16 +63,18 @@ class MaincontentComponent extends Component {
           <button onClick={this.handlelogout}>Log Out</button>
           <a href="/forgotpass" >forgotpass</a>
         </div> */}
-        <div ><MenuComponent /></div>
+        <div style={{height:'300px',alignItems:'center',width:'100%',paddingLeft:'300px'  }} > <br/><br/><br/><br/><a href="/registration"  className="btn btn-success" >Credit Card</a><br/>
+        <br/><br/><br/>
+        <a href="/registration" className="btn btn-success" >Personal Loan</a></div>
         <div className="tabs">
           <Switch>
-            <Route path="/" exact component={Login} />
+            {/* <Route path="/" exact component={Login} /> */}
             {/* <Route path="/register" exact component={Register} /> */}
-            <ProtectedRoute path="/register" exact component={Register} />
-            <ProtectedRoute path="/login" exact  component={Login} />
-            <ProtectedRoute path="/forgotpass" exact component={Forgotpass} />
+            <ProtectedRoute path="/registration" exact component={Registration} />
+            <ProtectedRoute path="/verification" exact  component={Verification} />
+            {/* <ProtectedRoute path="/forgotpass" exact component={Forgotpass} />
             <ProtectedRoute path="/home" exact component={Home} />
-            <ProtectedRoute exact path='/users' component={UserList} />
+            <ProtectedRoute exact path='/users' component={UserList} /> */}
           </Switch>
         </div>
       </div>

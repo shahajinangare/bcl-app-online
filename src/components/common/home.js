@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../assets/stylesheets/login.css';
 import Home from '../../view/common/home';
-import Commoncomponent from '../../components/common/common'
+ 
 import ReactDOM from 'react-dom';
 import MainComponent from '../../components/common/maincontent';
 class HomeComponent extends Component {

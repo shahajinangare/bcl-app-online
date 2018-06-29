@@ -8,7 +8,7 @@ class Header extends Component {
       <div className="App">
         <header className="App-header">          
             <img src={logo} alt="logo"   />      	    
-            <div className="headertext">Welcome to Bajaj Capital Admin Console</div>
+            <div className="headertext">Welcome to Bajaj Capital </div>
         </header>
        
       </div>

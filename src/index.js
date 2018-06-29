@@ -37,12 +37,12 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./app";
+ 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from './components/common/header';
 import Footer from './components/common/footer';
 //import MainContent from './maincontent'
-import MenuContent from './components/common/adminmenu';
+
 import MaincontentComponent from '../src/components/common/maincontent'
 
 const routesMain = (
@@ -67,16 +67,9 @@ const routesMain = (
       </Switch>
     </BrowserRouter>
   );
-  const routesMenu = (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/"  component={MenuContent} />
-      </Switch>
-    </BrowserRouter>
-  );
+  
 
  ReactDOM.render(routesHeader, document.getElementById('header'));
-// ReactDOM.render(routesMenu, document.getElementById('menu-root'));
  ReactDOM.render(routesMain, document.getElementById('main-content'));
  ReactDOM.render(routesfooter, document.getElementById('footer'));
 
