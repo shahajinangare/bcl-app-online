@@ -7,15 +7,15 @@ class Application extends Component {
     super(props);
       
       this.state = {
-      custData: [],
+      custData:[],
       ErrorMsg:''
       };
     
-      this.btnsubmit = this.btnsubmit.bind(this);
+      this.applicationsubmit = this.applicationsubmit.bind(this);
     }
     componentDidMount() {
       this.getCustomerinfo();
-      sessionStorage.clear();
+     
      
     }
     
@@ -36,10 +36,12 @@ class Application extends Component {
         .then((responseJson) => {
         
           this.setState({
-            custData: responseJson.result
-          });
+            //custData: responseJson.result
+            
+            custData : responseJson.result
+        });
 
-          console.log(this.state.custData[0].NAME);
+          console.log(this.state.custData);
          
       })
       .catch((error) => {
@@ -47,14 +49,16 @@ class Application extends Component {
       });
     }
 
-    btnsubmit = (event) => {
+    applicationsubmit(event){
       
-      
+    alert(event.target.fname.value)
+    alert(event.target.email.value)
     };
     
     
     render() {
       return (
+      
           <ApplicationContent objapplication={this}/>
       )
     }
