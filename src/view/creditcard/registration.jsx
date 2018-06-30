@@ -13,24 +13,24 @@ const RegistrationContent = ({objregister}) => (
 						<div className="login-group">
 							<div className="form-group">
 								<label htmlFor="name" className="sr-only">Customer Name</label>
-								<input type="text" className="form-control" id="name" name="name" placeholder="Customer Name" required maxLength="30"/>
+								<input type="text" className="form-control" id="name" name="name" placeholder="Customer Name"  maxLength="30"/>
 							</div>
 							<div className="form-group">
 								<label htmlFor="mobileno" className="sr-only">Mobile no</label>
-								<input type="number" className="form-control" id="mobileno" name="mobileno" placeholder="Mobile no" required maxLength="10"/>
+								<input type="number" className="form-control" id="mobileno" name="mobileno" placeholder="Mobile no"  maxLength="10"/>
 							</div>
 							<div className="form-group">
 								<label htmlFor="emailid" className="sr-only">Email Id</label>
-								<input type="email" className="form-control" id="emailid" name="emailid" autoComplete="off" placeholder="Email Id" required  maxLength="30" />
+								<input type="email" className="form-control" id="emailid" name="emailid" autoComplete="off" placeholder="Email Id"   maxLength="30" />
 							</div>
 							<div className="form-group">
 								<label htmlFor="pincode" className="sr-only">Pincode</label>
-								<input type="number" className="form-control" id="pincode" name="pincode" placeholder="Pincode" required maxLength="6"/>
+								<input type="number" className="form-control" id="pincode" name="pincode" placeholder="Pincode"  maxLength="6"/>
 							</div>
 
 							<div className="form-group">
 								<label htmlFor="income" className="sr-only">Income</label>
-								<input type="number" className="form-control" id="income" name="income" placeholder="Income" required maxLength="6"/>
+								<input type="number" className="form-control" id="income" name="income" placeholder="Income"  maxLength="6"/>
 							</div>
 						</div>
 						<button type="submit" className="login-button" ><i className="fa fa-chevron-right"></i></button>
