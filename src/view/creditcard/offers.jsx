@@ -8,6 +8,7 @@ const OfferListContent = ({ offerinput }) => (
 
     <div>
 
+<h1> Offers Available to you </h1>
         <ReactTable
             data={offerinput.state.outData}
             columns={[
@@ -26,7 +27,7 @@ const OfferListContent = ({ offerinput }) => (
                     accessor: "cardname",
                 },
                 {
-                Header: 'Actions',
+                Header: '',
                 filterable:false,
                 width: 200,
                 Cell:
