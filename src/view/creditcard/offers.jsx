@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import '../../assets/stylesheets/app.css';
 
 
 const OfferListContent = ({ offerinput }) => (
@@ -13,23 +14,44 @@ const OfferListContent = ({ offerinput }) => (
             data={offerinput.state.outData}
             columns={[
                 {
-                    Header: "",
+                    Header: "Card",
                     Cell: selectedrow => {
                         return (
                             <div>
+                                   <label> {selectedrow.original.cardname} </label>
+                                   <br/>
                                 <img src={selectedrow.original.logopath} />
+                            </div>
+                        )
+                    }
+                },               
+                {
+                    Header: "1st Year Fees",
+                    className: 'offergrid',                 
+                    Cell: selectedrow => {
+                        return (
+                            <div>
+                               <label> {selectedrow.original.firstyearfees} </label>
                             </div>
                         )
                     }
                 },
                 {
-                    Header: "",
-                    accessor: "cardname",
+                    Header: "Rewards Value",
+                    className: 'offergrid',                                   
+                    Cell: selectedrow => {
+                        return (
+                            <div>
+                               <label> {selectedrow.original.rewardsvalue} </label>
+                            </div>
+                        )
+                    }
                 },
                 {
                 Header: '',
                 filterable:false,
                 width: 200,
+                className: 'offergrid',     
                 Cell:
                     application => {                        
                             return (

@@ -92,7 +92,7 @@ class OfferList extends Component {
                         loggedIn: true,
                       },
                       () => {
-                        this.props.history.push(prevLocation || "/registration");
+                        this.props.history.push(prevLocation || "/application");
                       },
                     );
                 }
