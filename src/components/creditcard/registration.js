@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import RegistrationContent from '../../view/creditcard/registration'
+import { deviceDetect } from 'react-device-detect';
+import publicIP from 'react-native-public-ip';
 
 class Registration extends Component {
 
@@ -22,56 +24,69 @@ class Registration extends Component {
       const { prevLocation } = state;
 
 
-      this.setState(
-        {
-          loggedIn: true,
+   
+      let IPaddress='';
+      publicIP().then(ip => {
+        console.log(ip);
+        IPaddress =ip;
+      });
+
+      var randomnumber ='';
+      const items ='1234567890'
+      for (var i = 0; i < 5; i++)
+      randomnumber += items[Math.floor(Math.random()*items.length)];
+
+
+      const deviceinfo= deviceDetect();
+      console.log(randomnumber);
+      event.preventDefault();
+      fetch('http://localhost:7000/creditcard/customerregistration', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
-        () => {
-          this.props.history.push(prevLocation || "/verification");
-        },
-      );
-
-     // var hashedPassword = PasswordHash.generate(event.target.password.value)
-
-     // console.log(hashedPassword);
-
-      // event.preventDefault();
-      // fetch('http://localhost:7000/admin/login', {
-      //   method: 'POST',
-      //   headers: {
-      //     Accept: 'application/json',
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body:JSON.stringify({
-      //     emailid: event.target.emailid.value,
-      //     password:event.target.password.value
-      //   }),
-      // }).then((response) => response.json())
-      //     .then((responseJson) => {
-      //      // console.log(JSON.stringify(responseJson.result[0]));
-      //         if(responseJson.code === 200)
-      //         {
-      //           sessionStorage.setItem('userdet', JSON.stringify(responseJson.result[0]));
-      //           this.setState(
-      //             {
-      //               loggedIn: true,
-      //             },
-      //             () => {
-      //               this.props.history.push(prevLocation || "/register");
-      //             },
-      //           );
-      //         }
-      //         else
-      //         {
-      //           this.setState({
-      //             ErrorMsg: responseJson.message
-      //           });
-      //         }
-      //       return responseJson.result;
-      //     })
-      //     .catch((error) => {
-      //       console.error(error);
-      //     });
+        body:JSON.stringify({
+          name: event.target.name.value,
+          emailid:event.target.emailid.value,
+          mobileno: event.target.mobileno.value,
+          pincode: event.target.pincode.value,
+          income:event.target.income.value,
+          otp:randomnumber,
+          latlong:'333',
+          macaddress:'sdld',
+          browser:deviceinfo.browserName,
+          os:deviceinfo.osName,
+          source: deviceinfo.engineName,
+          createdby:'1',
+          createdip:IPaddress
+        }),
+      }).then((response) => response.json())
+          .then((responseJson) => {
+           // console.log(JSON.stringify(responseJson.result[0]));
+              if(responseJson.code === 200)
+              {
+                sessionStorage.setItem('cccustdet', JSON.stringify(responseJson.result[0]));
+                this.setState(
+                  {
+                    loggedIn: true,
+                  },
+                  () => {
+                    this.props.history.push(prevLocation || "/verification");
+                  },
+                );
+              }
+              else
+              {
+                this.setState({
+                  ErrorMsg: responseJson.message
+                });
+              }
+            return responseJson.result;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
     };
     
     
