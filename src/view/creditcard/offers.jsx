@@ -2,6 +2,7 @@ import React from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import '../../assets/stylesheets/app.css';
+import CardDetails from '../../view/creditcard/carddetails';
 
 
 const OfferListContent = ({ offerinput }) => (
@@ -24,7 +25,20 @@ const OfferListContent = ({ offerinput }) => (
                             </div>
                         )
                     }
-                },               
+                }, 
+                {
+                    expander: true,                   
+                    width: 100,
+                    className: 'offergrid',   
+                    Expander: 
+                      <div>                               
+                          <span> Know more</span>
+                      </div>,
+                    style: {
+                      cursor: "pointer"                    
+                    }
+               
+                  },              
                 {
                     Header: "1st Year Fees",
                     className: 'offergrid',                 
@@ -71,6 +85,7 @@ const OfferListContent = ({ offerinput }) => (
             }
             defaultPageSize={10}
             className="-striped -highlight"
+            SubComponent={() => <CardDetails/>}
         />
 
 
