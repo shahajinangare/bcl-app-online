@@ -17,6 +17,9 @@ class OfferList extends Component {
         this.getoffers = this.getoffers.bind(this);
     }
 
+
+ 
+    
  
     getoffers() {
 
@@ -38,7 +41,6 @@ class OfferList extends Component {
                 this.setState({
                     outData: responseJson.result
                 });
-
                 console.log(this.state.outData);
                 return responseJson.result;
             })
@@ -50,20 +52,7 @@ class OfferList extends Component {
     createapplication(application) {
 
         console.log(application.original);
-        // application.customerid,
-        // application.bankid,
-        // application.statusid,
-        // application.offerid,
-        // application.income,
-        // application.pincode,
-        // application.latlong,
-        // application.macaddress,
-        // application.browser,
-        // application.os,
-        // application.source,
-        // application.createdby,
-        // application.createdip
-
+      
         const deviceinfo= deviceDetect();
 
         fetch('http://localhost:7000/creditcard/createapplication', {
@@ -92,13 +81,29 @@ class OfferList extends Component {
             .then((responseJson) => {
                
                 if (responseJson.code === 200)
-                    alert('Application Number :' + responseJson.outid + ' is created.');
+                 {   
+                     alert('Application Number :' + responseJson.outid + ' is created.');
+                    const { state = {} } = this.props.location;
+                    const { prevLocation } = state;
+              
+              
+                    this.setState(
+                      {
+                        loggedIn: true,
+                      },
+                      () => {
+                        this.props.history.push(prevLocation || "/registration");
+                      },
+                    );
+                }
+              
+               
             })
             .catch((error) => {
                 console.error(error);
             });
 
-        window.location.reload();
+      
     }
     componentDidMount() {
 

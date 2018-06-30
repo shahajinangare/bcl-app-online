@@ -5,6 +5,7 @@ import Registration from '../../components/creditcard/registration';
 import Verification from '../../components/creditcard/verification';
 import Offers from '../../components/creditcard/offers';
 import Home from '../../components/common/home';
+import Appliaction from '../../components/creditcard/application';
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
   return (
     
@@ -62,6 +63,7 @@ class MaincontentComponent extends Component {
             <ProtectedRoute path="/registration" exact component={Registration} />
             <ProtectedRoute path="/verification" exact  component={Verification} />
             <ProtectedRoute path="/offers" exact  component={Offers} />
+            <ProtectedRoute path="/application" exact  component={Appliaction} />
             {/* <ProtectedRoute path="/forgotpass" exact component={Forgotpass} />
             <ProtectedRoute path="/home" exact component={Home} />
             <ProtectedRoute exact path='/users' component={UserList} /> */}
