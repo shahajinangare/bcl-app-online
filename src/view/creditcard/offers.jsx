@@ -10,7 +10,7 @@ const OfferListContent = ({ offerinput }) => (
 
     <div>
 
-<h1> Offers Available to you </h1>
+        <h1> Offers Available to you </h1>
         <ReactTable
             data={offerinput.state.outData}
             columns={[
@@ -19,76 +19,68 @@ const OfferListContent = ({ offerinput }) => (
                     Cell: selectedrow => {
                         return (
                             <div>
-                                   <label> {selectedrow.original.cardname} </label>
-                                   <br/>
+                                <label> {selectedrow.original.cardname} </label>
+                                <br />
                                 <img src={selectedrow.original.logopath} />
                             </div>
                         )
                     }
-                }, 
+                },
                 {
-                    expander: true,                   
+                    expander: true,
                     width: 100,
-                    className: 'offergrid',   
-                    Expander: 
-                      <div>                               
-                          <span> Know more</span>
-                      </div>,
+                    className: 'offergrid',
+                    Expander:
+                        <div>
+                            <span> Know more</span>
+                        </div>,
                     style: {
-                      cursor: "pointer"                    
+                        cursor: "pointer"
                     }
-               
-                  },              
+                },
                 {
                     Header: "1st Year Fees",
-                    className: 'offergrid',                 
+                    className: 'offergrid',
                     Cell: selectedrow => {
                         return (
                             <div>
-                               <label> {selectedrow.original.firstyearfees} </label>
+                                <label> {selectedrow.original.firstyearfees} </label>
                             </div>
                         )
                     }
                 },
                 {
                     Header: "Rewards Value",
-                    className: 'offergrid',                                   
+                    className: 'offergrid',
                     Cell: selectedrow => {
                         return (
                             <div>
-                               <label> {selectedrow.original.rewardsvalue} </label>
+                                <label> {selectedrow.original.rewardsvalue} </label>
                             </div>
                         )
                     }
                 },
                 {
-                Header: '',
-                filterable:false,
-                width: 200,
-                className: 'offergrid',     
-                Cell:
-                    application => {                        
+                    Header: '',
+                    filterable: false,
+                    width: 200,
+                    className: 'offergrid',
+                    Cell: 
+                        application => {
                             return (
                                 <div>
-                                    <button style={{backgroundColor:'#ff9939',width:'100px',height:'50px'}}
+                                    <button style={{ backgroundColor: '#ff9939', width: '100px', height: '50px' }}
                                         onClick={e => offerinput.createapplication(application)}>Select</button>
                                 </div>
-                            )                     
-                       
-
-
-                    }
-            }
-
-
+                            )
+                        }
+                }
             ]
             }
             defaultPageSize={10}
             className="-striped -highlight"
-            SubComponent={() => <CardDetails/>}
+            SubComponent={() => <CardDetails />}
         />
-
-
     </div>
 );
 
