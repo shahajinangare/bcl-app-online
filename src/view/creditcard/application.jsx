@@ -13,10 +13,11 @@ const ApplicationContent = ({objapplication}) => (
 						<div className="login-group">
 						<input type="hidden" className="form-control" id="hdncustid" name="hdncustid"/>
 						<div className="form-group">
-							<select name="prefix" id="prefix" className="form-control" required >
-								<option key='1' value='1'>Mr.</option>
-								<option key='2' value='2'>Mrs.</option>
-								<option key='3' value='3'>Miss</option>
+						
+							<select name="prefix" id="prefix" className="form-control" value={objapplication.state.prefixid} onChange={objapplication.handlePrefixChange}  required >
+								<option key='Mr.' value='Mr.'>Mr.</option>
+								<option key='Mrs.' value='Mrs.'>Mrs.</option>
+								<option key='Miss.' value='Miss.'>Miss</option>
 								</select>
 							</div>
 							<div className="form-group">
@@ -37,10 +38,10 @@ const ApplicationContent = ({objapplication}) => (
 							</div>
                             <div className="form-group">
 								<label htmlFor="name" className="sr-only">Gender</label>
-								<select name="gender" id="gender" className="form-control" required >
-								<option key='1' value='1'>M</option>
-								<option key='2' value='2'>F</option>
-								<option key='3' value='3'>T</option>
+								<select name="gender" id="gender" className="form-control" value={objapplication.state.genderid} onChange={objapplication.handleGenderChange} required >
+								<option key='M' value='M'>M</option>
+								<option key='F' value='F'>F</option>
+								<option key='T' value='T'>T</option>
 								</select>
 								
 							</div>
@@ -54,7 +55,9 @@ const ApplicationContent = ({objapplication}) => (
 							</div>
                             <div className="form-group">
 								<label htmlFor="name" className="sr-only">Qualification</label>
-								<input type="text" className="form-control" id="qualification" name="qualification" placeholder="Qualification" defaultValue={objapplication.state.custData.map(item =>item.emailid)} required maxLength="15"/>
+								<select name="qualificationid" id="qualificationid" className="form-control" value={objapplication.state.qualificationid} onChange={objapplication.handleSelectChange} >
+                              {objapplication.state.qualificationall.map((item) => <option key={item.qualificationid} value={item.qualificationid}>{item.qualification}</option>)}
+                            </select>
 							</div>
 
                               
