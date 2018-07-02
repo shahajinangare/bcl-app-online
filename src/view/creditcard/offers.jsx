@@ -60,12 +60,13 @@ const OfferListContent = ({ offerinput }) => (
                         )
                     }
                 },
+                
                 {
                     Header: '',
                     filterable: false,
                     width: 200,
                     className: 'offergrid',
-                    Cell: 
+                    Cell:
                         application => {
                             return (
                                 <div>
