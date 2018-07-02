@@ -10,7 +10,7 @@
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-data-components": "^1.2.0",
-    "react-device-detect": "^1.4.6",
+    "react-device-detect": "^1.5.7",
     "react-dom": "^16.4.1",
     "react-native-public-ip": "^1.0.0",
     "react-popout": "^1.0.1",
