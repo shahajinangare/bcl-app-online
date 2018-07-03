@@ -112,6 +112,9 @@ label.form-invalid {
   font-weight: bold;
   font-size: 11px;
 }
+input.is-invalid {
+  border-color: #dc3545;
+}
 label.form-invalid:after {
   top: 100%;
   right: 10px;
