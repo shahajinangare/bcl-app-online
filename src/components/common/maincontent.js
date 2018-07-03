@@ -10,6 +10,7 @@ import Appliaction from '../../components/creditcard/application';
 import Loader from 'react-loader-spinner'
 import '../../assets/stylesheets/app.css';
 import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from "constants";
+import Thanks from '../../components/creditcard/thank';
 
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
   return (
@@ -83,6 +84,9 @@ class MaincontentComponent extends Component {
             <ProtectedRoute path="/verification" exact  component={Verification} />
             <ProtectedRoute path="/offers" exact  component={Offers} />
             <ProtectedRoute path="/application" exact  component={Appliaction} />
+            <ProtectedRoute path="/thankyou" exact  component={Thanks} />
+           
+            
             {/* <ProtectedRoute path="/forgotpass" exact component={Forgotpass} />
             <ProtectedRoute path="/home" exact component={Home} />
             <ProtectedRoute exact path='/users' component={UserList} /> */}

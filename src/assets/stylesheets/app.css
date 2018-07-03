@@ -75,5 +75,9 @@ a:link {
   margin-top: -20px;
   position: fixed;
   z-index: 19 !important;
-  
+}
+.offergrid
+{
+  text-align: center;
+  margin-top: 70px;
 }
