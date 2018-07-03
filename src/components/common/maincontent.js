@@ -8,7 +8,7 @@ import Home from '../../components/common/home';
 import Appliaction from '../../components/creditcard/application';
 
 import Loader from 'react-loader-spinner'
-import '../../assets/stylesheets/app.css';
+//import '../../assets/stylesheets/app.css';
 import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from "constants";
 import Thanks from '../../components/creditcard/thank';
 
