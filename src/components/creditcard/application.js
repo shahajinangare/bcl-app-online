@@ -71,6 +71,7 @@ class Application extends Component {
     
     getCustomerinfo()
     { 
+      const custdet=JSON.parse(sessionStorage.getItem('cccustdet'));
         fetch('http://localhost:7000/creditcard/getcustomerinfo',{
           method:'POST',
           headers:{
@@ -78,7 +79,7 @@ class Application extends Component {
             'Content-Type':'application/json',
           },
           body:JSON.stringify({
-            customerid:"1",
+            customerid:custdet.customerid,
 	          mobileno:""
           }),
 

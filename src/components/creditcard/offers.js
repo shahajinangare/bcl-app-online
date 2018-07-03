@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import OfferListContent from '../../view/creditcard/offers';
+import Compareoffers from '../../view/creditcard/compareoffers';
 import { deviceDetect } from 'react-device-detect';
-
+import ReactDOM from 'react-dom';
 
 class OfferList extends Component {
 
@@ -12,17 +13,25 @@ class OfferList extends Component {
         this.state = {
             outData: [],
             emailid: ''
+    
         };
       
         this.getoffers = this.getoffers.bind(this);
+        this.addtocompare = this.addtocompare.bind(this);
     }
-
-
- 
-    
+   
+    addtocompare(selectedrow)
+    {
+     // alert(selectedrow.original.offerid);
+     <Compareoffers/>
+    //  ReactDom.render(
+    //     <Popup />,
+    //     document.getElementById('popupContainer')
+  //  );
+    }
  
     getoffers() {
-
+        const custdet=JSON.parse(sessionStorage.getItem('cccustdet'));
         fetch('http://localhost:7000/creditcard/getoffers', {
             method: 'POST',
             headers: {
@@ -35,6 +44,12 @@ class OfferList extends Component {
                 pincode: '110002',
                 income:'25000'
             }),
+
+            // body: JSON.stringify({
+            //     customerid: custdet.customerid,
+            //     pincode:custdet.pincode,
+            //     income:custdet.income
+            // }),
         }).then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson.result);
@@ -115,6 +130,8 @@ class OfferList extends Component {
     render() {
 
         return <OfferListContent offerinput={this} />
+
+       
 
     }
 }

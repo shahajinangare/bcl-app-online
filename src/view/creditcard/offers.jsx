@@ -2,8 +2,12 @@ import React from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import '../../assets/stylesheets/app.css';
+import '../../assets/stylesheets/offer.css';
 import CardDetails from '../../view/creditcard/carddetails';
 
+const selectRowProp = {
+    mode: 'checkbox'
+  };
 
 const OfferListContent = ({ offerinput }) => (
 
@@ -11,11 +15,26 @@ const OfferListContent = ({ offerinput }) => (
     <div>
 
         <h1> Offers Available to you </h1>
-        <ReactTable
+        <ReactTable  
             data={offerinput.state.outData}
             columns={[
                 {
+                    Header: "Compare",
+                    width: 100,
+                    className: 'offergrid',
+                    Cell: selectedrow => {
+                        return (
+                            <div>
+                                <button onClick={e => offerinput.addtocompare(selectedrow)}> Add </button>
+                                
+                            </div>
+                        )
+                    }
+                },
+             
+                {
                     Header: "Card",
+                    width: 300,
                     Cell: selectedrow => {
                         return (
                             <div>
@@ -28,7 +47,7 @@ const OfferListContent = ({ offerinput }) => (
                 },
                 {
                     expander: true,
-                    width: 100,
+                    width: 80,
                     className: 'offergrid',
                     Expander:
                         <div>
@@ -60,7 +79,7 @@ const OfferListContent = ({ offerinput }) => (
                         )
                     }
                 },
-                
+               
                 {
                     Header: '',
                     filterable: false,
