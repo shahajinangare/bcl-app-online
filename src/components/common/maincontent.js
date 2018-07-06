@@ -11,6 +11,14 @@ import Loader from 'react-loader-spinner'
 //import '../../assets/stylesheets/app.css';
 import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from "constants";
 import Thanks from '../../components/creditcard/thank';
+import Modal from 'react-modal';
+
+import SimpleUsage from '../common/model';
+Modal.setAppElement('#modeluser');
+const examples = [
+  SimpleUsage
+];
+Modal.setAppElement('#modeluser');
 
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
   return (
@@ -32,11 +40,20 @@ class MaincontentComponent extends Component {
       
       this.state = {
         loggedIn: true,
-        isLoaded: 'block'
+        isLoaded: 'block',
+        isOpen: true
       };
     
-     
+      this.toggleModal = this.toggleModal.bind(this);
     }
+
+    toggleModal = () => {
+      this.setState({
+        isOpen: !this.state.isOpen
+      });
+    }
+
+
   handleLogin = () => {
     const { state = {} } = this.props.location;
     const { prevLocation } = state;
@@ -93,7 +110,16 @@ class MaincontentComponent extends Component {
           </Switch>
         </div>
        
-    
+        <div>
+            {examples.map((example, key) => {
+            const ExampleApp = example.app;
+            return (
+            <div key={key + 1} className="example">
+              <h3>{`#${key + 1}. ${example.label}`}</h3>               <ExampleApp />
+            </div>
+            );
+            })}
+          </div>
       </div>
     );
   }
