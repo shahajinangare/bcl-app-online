@@ -2,10 +2,13 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
- 
+import Loader from '../../components/common/loader'
 const ApplicationContent = ({objapplication}) => (
 	
 	<div>
+		{ 
+             objapplication.state.isLoaded==='block'?<Loader/>:""
+        }
 		<div className="text-center" style={{padding:'10px 0'}}>
 		
 			

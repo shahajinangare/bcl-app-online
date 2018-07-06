@@ -17,6 +17,7 @@ class Application extends Component {
       genderid:'',
       ErrorMsg:'',
       startDate:moment(),
+      isLoaded: 'none',
       };
     
       this.applicationsubmit = this.applicationsubmit.bind(this);
@@ -113,10 +114,11 @@ class Application extends Component {
     }
 
     applicationsubmit(event){
+      this.setState({
+        isLoaded: 'block'
+      });  
       
    const deviceinfo= deviceDetect();
-   
-
    event.preventDefault();
    fetch('http://localhost:7000/creditcard/createcustomerprofile', {
      method: 'POST',

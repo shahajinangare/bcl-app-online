@@ -5,9 +5,6 @@ import '../../assets/stylesheets/app.css';
 import '../../assets/stylesheets/offer.css';
 import CardDetails from '../../view/creditcard/carddetails';
 
-const selectRowProp = {
-    mode: 'checkbox'
-  };
 
 const OfferListContent = ({ offerinput }) => (
 
@@ -25,10 +22,10 @@ const OfferListContent = ({ offerinput }) => (
                     Cell: selectedrow => {
                         return (
                             <div>
-                                <button onClick={e => offerinput.addtocompare(selectedrow)}> Add </button>
-                                
+                                <button onClick={e => offerinput.addtocompare(selectedrow)}> Add </button>                                
                             </div>
                         )
+                        
                     }
                 },
              
