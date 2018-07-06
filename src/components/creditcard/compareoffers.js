@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import CompareoffersContent from '../../view/creditcard/compareoffers';
 import OfferListContent from '../../components/creditcard/offers';
 import ReactDOM from 'react-dom';
+const DEFAULT_TITLE = 'Default title';
+
+
 class CompareOffer extends Component {
 
     CompareOfferData = [];
@@ -11,15 +14,59 @@ class CompareOffer extends Component {
         this.state = {
             CompareOfferData: [],
             DistinctOfferData: [],
-            DistinctFeaturesDataunique: []
+            DistinctFeaturesDataunique: [],
+            currentModal: null,
+            title1: DEFAULT_TITLE,
         };
 
+
+        const {
+            title, isOpen, askToClose,
+            onAfterOpen, onRequestClose, onChangeInput
+          } = props;
 
         this.getcardfeatures = this.getcardfeatures.bind(this);
         this.closepopup = this.closepopup.bind(this);
 
     }
 
+    toggleModal = key => event => {
+        event.preventDefault();
+        if (this.state.currentModal) {
+          this.handleModalCloseRequest();
+          return;
+        }
+    
+        this.setState({
+          ...this.state,
+          currentModal: key,
+          title1: DEFAULT_TITLE
+        });
+      }
+
+
+      handleModalCloseRequest = () => {
+        // opportunity to validate something and keep the modal open even if it
+        // requested to be closed
+        this.setState({
+          ...this.state,
+          currentModal: null
+        });
+      }
+    
+      handleInputChange = e => {
+        let text = e.target.value;
+        if (text == '') {
+          text = DEFAULT_TITLE;
+        }
+        this.setState({ ...this.state, title1: text });
+      }
+    
+      handleOnAfterOpenModal = () => {
+        // when ready, we can access the available refs.
+        this.heading && (this.heading.style.color = '#F00');
+      }
+    
     closepopup() {
 
         window.location.reload();
@@ -67,6 +114,7 @@ class CompareOffer extends Component {
                     CompareOfferData: responseJson.result
                 });
 
+             
                 // this.setState({                 
                 //     DistinctOfferData: [unique.keys()]
                 // });

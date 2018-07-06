@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../assets/stylesheets/list.css';
+import Modal from 'react-modal';
 
 const backdropStyle = {
   position: 'fixed',
@@ -19,12 +20,47 @@ const modalStyle = {
   margin: '0 auto',
   padding: 30
 };
+const MODAL_A = 'modal_a';
+const MODAL_B = 'modal_b';
 
 const CompareoffersContent = ({ CompareoffersInput }) => (
 
 
-  <div id='Compareoffersdiv' className="backdrop" style={{ backdropStyle }}>
-    <div className="modal" style={{ modalStyle, display: 'block' }}>
+  <div id='Compareoffersdiv'>
+
+      <button type="button" className="btn btn-primary" onClick={CompareoffersInput.toggleModal(MODAL_B)}>Open Modal A</button>
+      <Modal
+          ref="mymodal2"
+          id="test2"
+          aria={{
+            labelledby: "heading",
+            describedby: "fulldescription"
+          }}
+          closeTimeoutMS={1}
+          contentLabel="modalB"
+          isOpen={CompareoffersInput.state.currentModal == MODAL_B}
+          shouldCloseOnOverlayClick={true}
+          onAfterOpen={CompareoffersInput.handleOnAfterOpenModal}
+           onRequestClose={CompareoffersInput.toggleModal(MODAL_B)}
+         
+           >
+              
+          <h1 id="heading" ref={h1 => this.heading = h1}>This is the modal 2!</h1>
+          <div id="fulldescription" tabIndex="0" role="document">
+            <p>This is a description of what it does: nothing :)</p>
+          </div>
+        </Modal>
+      
+      <Modal
+      id="test"
+      contentLabel="modalA"
+      closeTimeoutMS={150}
+      isOpen={CompareoffersInput.props.isOpen}
+      onAfterOpen={CompareoffersInput.props.onAfterOpen}
+      onRequestClose={CompareoffersInput.props.onRequestClose}
+      backdropOpacity= {0}
+     >
+    
       <table>
 
         <tr>
@@ -73,13 +109,9 @@ const CompareoffersContent = ({ CompareoffersInput }) => (
         })}
       </table>
 
-      <div className="footer">
-           <button onClick={e => CompareoffersInput.closepopup()}>
-          Close
-            </button>
-      </div>
+   </Modal>
     </div>
-  </div>
+ 
 
 
 );
