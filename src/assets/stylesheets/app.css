@@ -44,6 +44,38 @@
   margin: 0 auto;
 }
 
+
+a:link {
+  text-decoration: none;
+  color: blue;
+}
+.loader-wrapper {
+  text-align: center;
+  margin: 25px;
+}
+
+.loaded-contents {
+  margin: 25px;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10510;
+}
+.spinner {
+  left: 50%;
+  margin-left: -20px;
+  top: 50%;
+  margin-top: -20px;
+  position: fixed;
+  z-index: 19 !important;
+}
 .offergrid
 {
   text-align: center;

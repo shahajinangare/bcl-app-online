@@ -6,6 +6,10 @@ import Verification from '../../components/creditcard/verification';
 import Offers from '../../components/creditcard/offers';
 import Home from '../../components/common/home';
 import Appliaction from '../../components/creditcard/application';
+
+import Loader from 'react-loader-spinner'
+//import '../../assets/stylesheets/app.css';
+import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from "constants";
 import Thanks from '../../components/creditcard/thank';
 
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
@@ -22,6 +26,17 @@ const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
 };
 
 class MaincontentComponent extends Component {
+
+  constructor(props) {
+    super(props);
+      
+      this.state = {
+        loggedIn: true,
+        isLoaded: 'block'
+      };
+    
+     
+    }
   handleLogin = () => {
     const { state = {} } = this.props.location;
     const { prevLocation } = state;
@@ -29,6 +44,7 @@ class MaincontentComponent extends Component {
     this.setState(
       {
         loggedIn: true,
+        isLoaded: false
       },
       () => {
         this.props.history.push(prevLocation || "/register");
@@ -50,10 +66,12 @@ class MaincontentComponent extends Component {
     );
   };
 
+  
+
   render() {
   //  const { state = {} } = this.props.location;
    // const { error } = state;
-
+   //const { isLoaded } = this.state;
     return (
       <div>
         { }
@@ -74,6 +92,8 @@ class MaincontentComponent extends Component {
             <ProtectedRoute exact path='/users' component={UserList} /> */}
           </Switch>
         </div>
+       
+    
       </div>
     );
   }

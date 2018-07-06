@@ -8,7 +8,7 @@ class HomeComponent extends Component {
         super(props);
           
           this.state = {
-         // ErrorMsg:''
+            isLoaded: 'none'
           };
 
         }

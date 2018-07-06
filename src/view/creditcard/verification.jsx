@@ -1,12 +1,16 @@
 import React from 'react';
-
+import Loader from '../../components/common/loader'
 
 const VerificationContent = ({Verify}) => (
-	
-	 
 
 	<div>
-		<div className="text-center" style={{padding:'10px 0'}}>
+		{ 
+             Verify.state.isLoaded==='block'?<Loader/>:""
+
+		
+		}
+	
+	<div className="text-center" style={{padding:'10px 0'}}>
 		
 			
 			<div className="login-form-1">
@@ -32,8 +36,6 @@ const VerificationContent = ({Verify}) => (
 				
 			</div>
 		</div>
-
-	
 </div>
 );
 

@@ -11,7 +11,8 @@ class Verification extends Component {
       
       this.state = {
       ErrorMsg:'',
-      showmobileno:''
+      showmobileno:'',
+      isLoaded: 'none'
       };
     
       this.btnsubmit = this.btnsubmit.bind(this);
@@ -46,7 +47,9 @@ class Verification extends Component {
 
     
     btnsubmit = (event) => {
-      
+      this.setState({
+        isLoaded: 'block'
+      });  
       const { state = {} } = this.props.location;
       const { prevLocation } = state;
    
@@ -105,9 +108,9 @@ class Verification extends Component {
               else
               {
                 this.setState({
-                  ErrorMsg: responseJson.message
-
-
+                  ErrorMsg: responseJson.message,
+                  isLoaded: 'none'
+ 
                 });
               }
             return responseJson.result;

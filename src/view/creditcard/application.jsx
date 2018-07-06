@@ -1,8 +1,14 @@
 import React from 'react';
- 
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+import Loader from '../../components/common/loader'
 const ApplicationContent = ({objapplication}) => (
 	
 	<div>
+		{ 
+             objapplication.state.isLoaded==='block'?<Loader/>:""
+        }
 		<div className="text-center" style={{padding:'10px 0'}}>
 		
 			
@@ -36,7 +42,17 @@ const ApplicationContent = ({objapplication}) => (
 							</div>
                             <div className="form-group">
 								<label htmlFor="name" className="sr-only">DOB</label>
-								<input type="text" className="form-control" id="dob" name="dob" placeholder="DOB" defaultValue={objapplication.state.custData.map(item =>item.DOB)} required maxLength="15" autoComplete="off"/>
+								<DatePicker id="dob" name="dob"
+                                selected={objapplication.state.startDate}
+                                onChange={objapplication.handledateChange}
+                                peekNextMonth
+                                showMonthDropdown
+                                 showYearDropdown
+                                dropdownMode="select"
+                                dateFormat="DD/MM/YYYY"
+								placeholderText="MM/DD/YYYY"
+								
+                                readOnly/>
 							</div>
                             <div className="form-group">
 								<label htmlFor="name" className="sr-only">Gender</label>
@@ -170,6 +186,10 @@ const ApplicationContent = ({objapplication}) => (
 							<div className="form-group">
 								<label htmlFor="name" className="sr-only">PAN</label>
 								<input type="text" className="form-control" id="pan" name="pan" placeholder="PAN" defaultValue={objapplication.state.custData.map(item =>item.pancard)} required maxLength="10" autoComplete="off"/>
+							</div>
+							<div className="form-group">
+
+                         
 							</div>
 							
 						</div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApplicationContent from '../../view/creditcard/application'
 import { deviceDetect } from 'react-device-detect';
-
+import moment from 'moment';
 import ReactDOM from 'react-dom';
 
 class Application extends Component {
@@ -15,21 +15,23 @@ class Application extends Component {
       prefixid:'',
       qualificationid:'',
       genderid:'',
-      ErrorMsg:''
+      ErrorMsg:'',
+      startDate:moment(),
+      isLoaded: 'none',
       };
     
       this.applicationsubmit = this.applicationsubmit.bind(this);
       this.handleSelectChange = this.handleSelectChange.bind(this);
       this.handlePrefixChange = this.handlePrefixChange.bind(this);
       this.handleGenderChange = this.handleGenderChange.bind(this);
+      this.handledateChange = this.handledateChange.bind(this);
       
       
     }
     componentDidMount() {
       this.getAllrole();
       this.getCustomerinfo();
-     
-     
+      
     }
     handleSelectChange(event) {
       this.setState({qualificationid: event.target.value});
@@ -40,6 +42,12 @@ class Application extends Component {
     handleGenderChange(event) {
       this.setState({genderid: event.target.value});
     }
+
+    handledateChange(event) {
+      alert(event);
+      this.setState({startDate: event});
+    }
+
     getAllrole(){
       fetch('http://localhost:7000/creditcard/getqualification', {
         method: 'GET',
@@ -51,7 +59,7 @@ class Application extends Component {
       }).then((response) => response.json())
           .then((responseJson) => {
            
-              if(responseJson.code == '200')
+              if(responseJson.code == 200)
               {
                 let QualificationFromApi = responseJson.result.map(iteam => { return {qualificationid: iteam.qualificationid, qualification: iteam.qualification} })
                 this.setState({ qualificationall: [{qualificationid: '', qualification: 'Select qualification'}].concat(QualificationFromApi) });
@@ -80,21 +88,24 @@ class Application extends Component {
           },
           body:JSON.stringify({
             customerid:custdet.customerid,
-	          mobileno:""
+            mobileno:""
           }),
 
         }).then((response)=>response.json())
         .then((responseJson) => {
+          var momnetdate = moment(); 
+          var dob = responseJson.result[0].DOB;
+          var newdob = moment(dob);
+          momnetdate.set(newdob.toObject())
         
           this.setState({
             custData : responseJson.result,
             prefixid:responseJson.result[0].prefix,
             qualificationid:responseJson.result[0].qualificationid,
-            genderid:responseJson.result[0].gender
-
+            genderid:responseJson.result[0].gender,
+            startDate :momnetdate
         });
-
-          console.log(this.state.qualificationid);
+        
          
       })
       .catch((error) => {
@@ -103,10 +114,11 @@ class Application extends Component {
     }
 
     applicationsubmit(event){
+      this.setState({
+        isLoaded: 'block'
+      });  
       
    const deviceinfo= deviceDetect();
-
-  
    event.preventDefault();
    fetch('http://localhost:7000/creditcard/createcustomerprofile', {
      method: 'POST',

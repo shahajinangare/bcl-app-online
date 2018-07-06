@@ -9,7 +9,8 @@ class Registration extends Component {
     super(props);
       
       this.state = {
-      ErrorMsg:''
+      ErrorMsg:'',
+      isLoaded: 'none'
       };
     
       this.btnsubmit = this.btnsubmit.bind(this);
@@ -19,6 +20,9 @@ class Registration extends Component {
     }
 
     btnsubmit = (event) => {
+      this.setState({
+        isLoaded: 'block'
+      });  
       
       const { state = {} } = this.props.location;
       const { prevLocation } = state;
@@ -33,7 +37,7 @@ class Registration extends Component {
 
       var randomnumber ='';
       const items ='1234567890'
-      for (var i = 0; i < 5; i++)
+      for (var i = 0; i < 6; i++)
       randomnumber += items[Math.floor(Math.random()*items.length)];
 
 
@@ -79,7 +83,8 @@ class Registration extends Component {
               else
               {
                 this.setState({
-                  ErrorMsg: responseJson.message
+                  ErrorMsg: responseJson.message,
+                  isLoaded: 'none'
                 });
               }
             return responseJson.result;
