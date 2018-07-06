@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import OfferListContent from '../../view/creditcard/offers';
-import Compareoffers from '../../view/creditcard/compareoffers';
+import CompareselectContent from '../../components/creditcard/comselected';
 import { deviceDetect } from 'react-device-detect';
 import ReactDOM from 'react-dom';
+import CompareoffersContent from '../../components/creditcard/compareoffers';
+
 
 class OfferList extends Component {
 
@@ -12,37 +14,49 @@ class OfferList extends Component {
 
         this.state = {
             outData: [],
-            emailid: ''
-    
+            emailid: '',
+            cardArray: []
+
         };
-      
+
         this.getoffers = this.getoffers.bind(this);
         this.addtocompare = this.addtocompare.bind(this);
+        this.getcardfeatures = this.getcardfeatures.bind(this);
     }
-   
-    addtocompare(selectedrow)
-    {
-     // alert(selectedrow.original.offerid);
-     <Compareoffers/>
-    //  ReactDom.render(
-    //     <Popup />,
-    //     document.getElementById('popupContainer')
-  //  );
+
+    getcardfeatures() {
+
+        ReactDOM.render((<CompareoffersContent />), document.getElementById("sub-content"));
+
     }
- 
+
+
+    addtocompare(selectedrow) {
+
+        if (this.state.cardArray.length <= 3) {
+
+            this.state.cardArray.push(selectedrow.original);
+
+            ReactDOM.render((<CompareselectContent Comparesofferinput={this} />), document.getElementById("sub-content"));
+
+        }
+
+
+    }
+
     getoffers() {
-        const custdet=JSON.parse(sessionStorage.getItem('cccustdet'));
+        const custdet = JSON.parse(sessionStorage.getItem('cccustdet'));
         fetch('http://localhost:7000/creditcard/getoffers', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-         
+
             body: JSON.stringify({
                 customerid: '1',
                 pincode: '110002',
-                income:'25000'
+                income: '25000'
             }),
 
             // body: JSON.stringify({
@@ -67,8 +81,8 @@ class OfferList extends Component {
     createapplication(application) {
 
         console.log(application.original);
-      
-        const deviceinfo= deviceDetect();
+
+        const deviceinfo = deviceDetect();
 
         fetch('http://localhost:7000/creditcard/createapplication', {
             method: 'POST',
@@ -79,46 +93,45 @@ class OfferList extends Component {
             body: JSON.stringify({
                 customerid: application.original.customerid,
                 bankid: application.original.bankid,
-                statusid:1,
+                statusid: 1,
                 offerid: application.original.offerid,
                 income: application.original.income,
                 pincode: application.original.pincode,
-                latlong:'333',
-                macaddress:'sdld',
-                browser:deviceinfo.browserName,
-                os:deviceinfo.osName,
+                latlong: '333',
+                macaddress: 'sdld',
+                browser: deviceinfo.browserName,
+                os: deviceinfo.osName,
                 source: deviceinfo.engineName,
-                createdby:'',
-                createdip:'123.88.88.8'
+                createdby: '',
+                createdip: '123.88.88.8'
 
             }),
         }).then((response) => response.json())
             .then((responseJson) => {
-               
-                if (responseJson.code === 200)
-                 {   
-                     alert('Application Number :' + responseJson.outid + ' is created.');
+
+                if (responseJson.code === 200) {
+                    alert('Application Number :' + responseJson.outid + ' is created.');
                     const { state = {} } = this.props.location;
                     const { prevLocation } = state;
-              
-              
+
+
                     this.setState(
-                      {
-                        loggedIn: true,
-                      },
-                      () => {
-                        this.props.history.push(prevLocation || "/application");
-                      },
+                        {
+                            loggedIn: true,
+                        },
+                        () => {
+                            this.props.history.push(prevLocation || "/application");
+                        },
                     );
                 }
-              
-               
+
+
             })
             .catch((error) => {
                 console.error(error);
             });
 
-      
+
     }
     componentDidMount() {
 
@@ -131,7 +144,7 @@ class OfferList extends Component {
 
         return <OfferListContent offerinput={this} />
 
-       
+
 
     }
 }

@@ -34,5 +34,6 @@ const routesMain = (
 
  ReactDOM.render(routesHeader, document.getElementById('header'));
  ReactDOM.render(routesMain, document.getElementById('main-content'));
+ 
  ReactDOM.render(routesfooter, document.getElementById('footer'));
 
