@@ -3,21 +3,27 @@ import ApplicationContent from '../../view/creditcard/application'
 import { deviceDetect } from 'react-device-detect';
 import moment from 'moment';
 import ReactDOM from 'react-dom';
-
+let temp ="";
+let temp1 ="";
 class Application extends Component {
-
+ 
   constructor(props) {
     super(props);
-      
+   
       this.state = {
       custData:[],
       qualificationall:[],
+      Allcompany:[],
+      selectedcompany:'',
+      dataSource:[],
       prefixid:'',
       qualificationid:'',
       genderid:'',
       ErrorMsg:'',
       startDate:moment(),
       isLoaded: 'none',
+      compname:'',
+      
       };
     
       this.applicationsubmit = this.applicationsubmit.bind(this);
@@ -29,7 +35,9 @@ class Application extends Component {
       
     }
     componentDidMount() {
-      this.getAllrole();
+     
+      this.getqualification();
+      this.getcompany();
       this.getCustomerinfo();
       
     }
@@ -44,11 +52,44 @@ class Application extends Component {
     }
 
     handledateChange(event) {
-      alert(event);
+     
       this.setState({startDate: event});
     }
+    onDatechange(event) {
+     
+     alert(event)
+     
+    }
 
-    getAllrole(){
+    handleSearch = (value) => {
+      
+      var comp= this.state.Allcompany.filter(l => {
+        return l.companyname.toLowerCase().startsWith(value);
+      });
+
+      this.setState({
+        dataSource: comp
+      });
+
+       
+    }
+    onCompanySelect= (value) => {
+      //alert('onCompanySelect');
+      //alert(value);
+      this.setState({
+        selectedcompany: value
+      });
+    }
+    onCompanyChange= (value) => {
+      //alert('onCompanyChange');
+      //alert(value);
+      this.setState({
+        selectedcompany: value
+      });
+      
+    }
+
+    getqualification(){
       fetch('http://localhost:7000/creditcard/getqualification', {
         method: 'GET',
         headers: {
@@ -77,6 +118,36 @@ class Application extends Component {
           });
      }
     
+     getcompany(){
+      fetch('http://localhost:7000/creditcard/getcompany', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+     
+      }).then((response) => response.json())
+          .then((responseJson) => {
+           
+              if(responseJson.code == 200)
+              {
+                let CompanyFromApi = responseJson.result.map(iteam => { return {companyid: iteam.companyid, companyname: iteam.companyname} })
+                this.setState({ Allcompany: CompanyFromApi });
+                
+               }
+              else
+              {
+                this.setState({
+                  ErrorMsg: responseJson.message
+                });
+              }
+            
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+     }
+
     getCustomerinfo()
     { 
       const custdet=JSON.parse(sessionStorage.getItem('cccustdet'));
@@ -87,7 +158,8 @@ class Application extends Component {
             'Content-Type':'application/json',
           },
           body:JSON.stringify({
-            customerid:custdet.customerid,
+            //customerid:custdet.customerid,
+            customerid:'1',
             mobileno:""
           }),
 
@@ -103,10 +175,14 @@ class Application extends Component {
             prefixid:responseJson.result[0].prefix,
             qualificationid:responseJson.result[0].qualificationid,
             genderid:responseJson.result[0].gender,
+            compname:"ss", //responseJson.result[0].companyname,
             startDate :momnetdate
         });
+
+        console.log(this.state.compname)
+        console.log(this.state.startDate)
+        console.log(this.state.custData[0].DOB)
         
-         
       })
       .catch((error) => {
           console.error(error);
@@ -117,7 +193,7 @@ class Application extends Component {
       this.setState({
         isLoaded: 'block'
       });  
-      
+    alert(this.state.selectedcompany) 
    const deviceinfo= deviceDetect();
    event.preventDefault();
    fetch('http://localhost:7000/creditcard/createcustomerprofile', {
@@ -135,7 +211,7 @@ class Application extends Component {
           prefix:event.target.prefix.value,
           gender:event.target.gender.value,
           customerid:event.target.hdncustid.value,
-          companyname:event.target.companyname.value,
+          companyname:this.state.selectedcompany,
           compnayid:event.target.hdncompnayid.value,
           qualificationid :event.target.qualificationid.value,
           residenceaddress1:event.target.resadd1.value,
@@ -178,7 +254,8 @@ class Application extends Component {
            {
 
         const { state = {} } = this.props.location;
-      const { prevLocation } = state;
+        const { prevLocation } = state;
+        
 
             this.setState(
                       {
@@ -205,9 +282,11 @@ class Application extends Component {
     
     
     render() {
+   
       return (
+     
+          <ApplicationContent objapplication={this} test={this.state.compname}/>
       
-          <ApplicationContent objapplication={this}/>
       )
     }
   }

@@ -1,25 +1,34 @@
 import React from 'react';
-import DatePicker from 'react-datepicker';
+//import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Loader from '../../components/common/loader'
-const ApplicationContent = ({objapplication}) => (
+import 'antd/dist/antd.css';
+import { AutoComplete } from 'antd';
+import {DatePicker} from 'antd';
+
+
+
+
+const ApplicationContent = ({objapplication, test}) => (
 	
 	<div>
 		{ 
-             objapplication.state.isLoaded==='block'?<Loader/>:""
+			 objapplication.state.isLoaded==='block'?<Loader/>:""
         }
+		
 		<div className="text-center" style={{padding:'10px 0'}}>
 		
 			
 			<div className="login-form-1">
-			<form  onSubmit={objapplication.applicationsubmit}>
+			<form id="frm"  onSubmit={objapplication.applicationsubmit}>
 					<div className="login-form-main-message">{objapplication.state.ErrorMsg}</div>
 					<div className="main-login-form">
 						<div className="login-group">
 						<input type="hidden" className="form-control" id="hdncustid" name="hdncustid" value={objapplication.state.custData.map(item =>item.customerid)}/>
 
 						<input type="hidden" className="form-control" id="hdncompnayid" name="hdncompnayid" value={objapplication.state.custData.map(item =>item.companyid)}/>
+						
 						<div className="form-group">
 						
 							<select name="prefix" id="prefix" className="form-control" value={objapplication.state.prefixid} onChange={objapplication.handlePrefixChange}  required >
@@ -40,6 +49,7 @@ const ApplicationContent = ({objapplication}) => (
 								<label htmlFor="name" className="sr-only">Last Name</label>
 								<input type="text" pattern="^[a-zA-Z ]*$" className="form-control" id="lname" name="lname" placeholder="Last Name" required maxLength="15" autoComplete="off"/>
 							</div>
+                           
                             <div className="form-group">
 								<label htmlFor="name" className="sr-only">DOB</label>
 								<DatePicker id="dob" name="dob"
@@ -77,9 +87,7 @@ const ApplicationContent = ({objapplication}) => (
                               {objapplication.state.qualificationall.map((item) => <option key={item.qualificationid} value={item.qualificationid}>{item.qualification}</option>)}
                             </select>
 							</div>
-
-                              
-                            <div className="form-group">
+							<div className="form-group">
 								<label htmlFor="name" className="sr-only">EmailAddress</label>
 								<input type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" className="form-control" id="email" name="email" placeholder="EmailAddress" defaultValue={objapplication.state.custData.map(item =>item.emailid)} required maxLength="15" autoComplete="off"/>
 							</div>
@@ -133,7 +141,21 @@ const ApplicationContent = ({objapplication}) => (
 							</div>
                             <div className="form-group">
 								<label htmlFor="name" className="sr-only">CompanyName</label>
-								<input type="text" pattern="^[a-zA-Z ]*$" className="form-control" id="companyname" name="companyname" placeholder="CompanyName" defaultValue={objapplication.state.custData.map(item =>item.companyname)} required maxLength="15" autoComplete="off"/>
+								<input type="text" pattern="^[a-zA-Z ]*$" className="form-control" id="designation" 
+								name="designation" placeholder="Designation" 
+								defaultValue={test} required maxLength="15" autoComplete="off"/>
+								<AutoComplete
+								dataSource={objapplication.state.dataSource.map(item =>item.companyname)}
+								style={{ width: 250 }}
+								onSearch={objapplication.handleSearch}
+								onSelect={objapplication.onCompanySelect}
+								onChange={objapplication.onCompanyChange}
+								placeholder="Select company"
+								value= {"sdf"}
+								
+							/>
+
+						 
 							</div>
 
                             <div className="form-group">
@@ -187,8 +209,15 @@ const ApplicationContent = ({objapplication}) => (
 								<label htmlFor="name" className="sr-only">PAN</label>
 								<input type="text" className="form-control" id="pan" name="pan" placeholder="PAN" defaultValue={objapplication.state.custData.map(item =>item.pancard)} required maxLength="10" autoComplete="off"/>
 							</div>
-							<div className="form-group">
-
+								<div className="form-group">{
+									objapplication.state.custData.map(item =>item.DOB)
+									}
+							<DatePicker onChange={objapplication.onDatechange}
+										
+										placeholder="DD/MM/YYYY"
+										dateFormat="YYYY-MM-DD"
+										
+										/>
                          
 							</div>
 							
